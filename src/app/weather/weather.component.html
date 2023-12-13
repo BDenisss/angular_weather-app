@@ -1,0 +1,82 @@
+<h1 class="text-center font-semibold text-2xl drop-shadow-xl">Weather app</h1>
+<div class="flex justify-center w-full">
+    <div class="flex flex-col justify-center max-w-xl rounded-lg shadow p-4 m-4 backdrop-blur-xl bg-[#219ebc]/50 w-full">
+        <h1 class="font-bold">Recherche d'une météo </h1>
+        <form action="" [formGroup]="weatherSearchForm" (ngSubmit)="sendToAPIXU(weatherSearchForm.value)">
+            <div class="flex justify-center align-center flex-col gap-2">
+                <label class="block mb-2 font-medium text-gray-900 dark:text-white" for="city"></label>
+                <input  
+                    type="text" 
+                    id="weatherLocation" 
+                    name="weatherLocation" 
+                    aria-describedby="weatherLocation"
+                    placeholder="Rechercher une ville..."
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    formControlName="location"
+                /> 
+                <div>
+                    <button 
+                        class="w-full text-white text-center font-bold bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                        type="submit">
+                        Rechercher la météo</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="flex flex-wrap items-center align-center justify-center w-full">
+    <div class="flex flex-col justify-center items-center w-full">
+        <div *ngIf="weatherData" class="p-4 m-4 backdrop-blur-2xl bg-[#219ebc]/50 rounded-lg max-w-xl text-center border shadow w-full" @fadeLeft>
+            <p class="font-semibold text-xl">{{ this.weatherData?.location.country}}, {{ this.weatherData?.location.name }}</p>
+            <div echarts [options]="option" class="echarts-style flex justify-center items-center" (chartInit)="onChartInit($event)"></div>
+            <div class="flex justify-center items-center flex-row-reverse">
+                <p class="font-semibold text-xl">{{ this.weatherData?.current.condition.text }}</p>
+                <img src="{{ this.weatherData?.current.condition.icon }}" alt="weather icon">
+            </div>
+        </div>
+    </div>
+    
+    <div class="flex items-center justify-center w-full flex-col">
+        <div *ngIf="weatherData" class="flex justify-center align-center items-center gap-y-4 w-full" @fadeRight>
+            <div class=" p-2 m-4 backdrop-blur-2xl bg-[#219ebc]/50 rounded-lg max-w-xl text-center border shadow w-full">
+                <div class="absolute top-0 left-0 mt-2 ml-2">
+                    <p class="font-normal opacity-[75%]">Ressenti</p>
+                </div>
+                <div class="flex flex-col justify-center">
+                    <p class="text-2xl font-bold text-center">{{ this.weatherData?.current.feelslike_c }}°C</p>
+                    <div class="flex justify-center items-center flex-row-reverse">
+                        <p *ngIf="this.weatherData?.current.temp_c === this.weatherData?.current.feelslike_c" 
+                            class="font-semibold">Similaire à la température réelle.</p>
+                            <p *ngIf="this.weatherData?.current.temp_c > this.weatherData?.current.feelslike_c" 
+                            class="font-semibold">Ressenti plus frais.</p>
+                            <p *ngIf="this.weatherData?.current.temp_c < this.weatherData?.current.feelslike_c" 
+                            class="font-semibold">Ressenti plus chaud.</p>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    
+            <div *ngIf="weatherData" class="flex justify-center w-full">
+                <div class=" p-2 m-4 backdrop-blur-2xl bg-[#219ebc]/50 rounded-lg max-w-xl text-center border shadow w-full" @fadeLeft>
+                    <div class="absolute top-0 left-0 mt-2 ml-2">
+                        <p class="font-normal opacity-[75%]">Vent</p>
+                    </div>
+                    <div class="flex justify-around flex-col items-center">
+                        <p class="text-xl font-semibold text-center">{{ this.weatherData?.current.wind_kph }} km/h</p>
+                        <div class="flex justify-center items-center flex-row-reverse">
+                            <p class="text-xl font-semibold">Direction : {{ this.weatherData?.current.wind_dir }} | {{ this.weatherData?.current.wind_degree }}°</p>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+    </div>
+
+
+
+
+
+
+
+
