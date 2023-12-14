@@ -1,0 +1,70 @@
+<div>
+    <h1 class="text-center font-semibold text-2xl drop-shadow-xl">Weather app</h1>
+    <button routerLink="/" 
+    class="w-full text-white text-sm text-center font-bold bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 rounded-xl px-5 py-2.5 me-2 mb-2">
+        Change UI</button>
+</div>
+
+<div class="flex justify-center w-full">
+    <div class="flex flex-col justify-center max-w-xl rounded-xl shadow p-4 m-4 backdrop-blur-xl bg-[#219ebc]/50 w-full">
+        <h1 class="font-bold">Recherche d'une météo </h1>
+        <form action="" [formGroup]="weatherSearchForm" (ngSubmit)="sendToAPIXU(weatherSearchForm.value)">
+            <div class="flex justify-center align-center flex-col gap-2">
+                <label class="block mb-2 font-medium text-gray-900 dark:text-white" for="city"></label>
+                <input  
+                    type="text" 
+                    id="weatherLocation" 
+                    name="weatherLocation" 
+                    aria-describedby="weatherLocation"
+                    placeholder="Rechercher une ville..."
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    formControlName="location"
+                /> 
+                <div>
+                    <button 
+                        class="w-full text-white text-center font-bold bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+                        type="submit">
+                        Rechercher la météo</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="flex items-center justify-center w-full">
+<div class="flex flex-col bg-[#0d1b2a] rounded-2xl p-4 w-full max-w-xl">
+						<div class="font-bold text-xl">{{ this.weatherData?.location.name }}, {{ this.weatherData?.location.country }}</div>
+						<div class="text-sm text-gray-500">{{ this.weatherData?.location.localtime }}</div>
+						<div class="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-indigo-400 h-24 w-24">
+                            <img class="h-full w-full" src="{{ this.weatherData?.current.condition.icon }}" alt="weather icon">
+						</div>
+						<div class="flex flex-row items-center justify-center mt-6">
+							<div class="font-medium text-6xl">{{ this.weatherData?.current.temp_c }}</div>
+							<div class="flex flex-col items-center ml-6">
+								<div>{{ this.weatherData?.current.condition.text }}</div>
+								<div class="mt-1">
+									<span class="text-sm"><i class="far fa-long-arrow-up"></i></span>
+									<span class="text-sm font-light text-gray-500">{{ this.weatherData?.forecast.forecastday[0].day.maxtemp_c }}°C</span>
+								</div>
+								<div>
+									<span class="text-sm"><i class="far fa-long-arrow-down"></i></span>
+									<span class="text-sm font-light text-gray-500">{{ this.weatherData?.forecast.forecastday[0].day.mintemp_c }}°C</span>
+								</div>
+							</div>
+						</div>
+						<div class="flex flex-row justify-between mt-6">
+							<div class="flex flex-col items-center">
+								<div class="font-medium text-sm">Vent</div>
+								<div class="text-sm text-gray-500">{{ this.weatherData?.current.wind_kph }} km/h</div>
+							</div>
+							<div class="flex flex-col items-center">
+								<div class="font-medium text-sm">Humidité</div>
+								<div class="text-sm text-gray-500">{{ this.weatherData?.current.humidity }}%</div>
+							</div>
+							<div class="flex flex-col items-center">
+								<div class="font-medium text-sm">Visibilité</div>
+								<div class="text-sm text-gray-500">{{ this.weatherData?.current.vis_km }} km</div>
+							</div>
+						</div>
+					</div>
+</div>
