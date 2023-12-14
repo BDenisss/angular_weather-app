@@ -85,6 +85,7 @@
     z-index: 5;
     /*-webkit-animation: rotate infinite 6s ease;*/
     transform: rotate(100deg) scale(0.8);
+    transition: transform 1s ease-in-out;
 }
 
 .compass-pointer {
