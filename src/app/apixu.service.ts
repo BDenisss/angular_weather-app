@@ -10,7 +10,7 @@ export class ApixuService {
 
   getWeather(location: string) {
     return this.http.get(
-      'http://api.weatherapi.com/v1/current.json?key=86ed1e2e3fa8463dbf6144335231212&q=' + location + '&aqi=yes' + '&lang=fr'
+      'http://api.weatherapi.com/v1/forecast.json?key=86ed1e2e3fa8463dbf6144335231212&q=' + location + '&aqi=yes' + '&lang=fr'
     );
   }
 

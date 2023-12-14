@@ -16,5 +16,5 @@ import {
   ]
 })
 export class AppComponent {
-  title = 'weatherapp2';
+  title = 'Weather App';
 }

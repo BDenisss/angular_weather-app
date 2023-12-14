@@ -26,9 +26,9 @@
 </div>
 
 
-<div class="flex flex-wrap items-center align-center justify-center w-full">
+<div class="flex flex-wrap items-center align-center justify-center max-w-xl gap-2">
     <div class="flex flex-col justify-center items-center w-full">
-        <div *ngIf="weatherData" class="p-4 m-4 backdrop-blur-2xl bg-[#219ebc]/50 rounded-lg max-w-xl text-center border shadow w-full" @fadeLeft>
+        <div *ngIf="weatherData" class="p-4 backdrop-blur-2xl bg-[#219ebc]/50 rounded-lg max-w-xl text-center border shadow w-full" @fadeLeft>
             <p class="font-semibold text-xl">{{ this.weatherData?.location.country}}, {{ this.weatherData?.location.name }}</p>
             <div echarts [options]="option" class="echarts-style flex justify-center items-center" (chartInit)="onChartInit($event)"></div>
             <div class="flex justify-center items-center flex-row-reverse">
@@ -38,9 +38,9 @@
         </div>
     </div>
     
-    <div class="flex items-center justify-center w-full flex-col">
-        <div *ngIf="weatherData" class="flex justify-center align-center items-center gap-y-4 w-full" @fadeRight>
-            <div class=" p-2 m-4 backdrop-blur-2xl bg-[#219ebc]/50 rounded-lg max-w-xl text-center border shadow w-full">
+    <div class="flex items-center justify-center w-full flex-col gap-2">
+        <div *ngIf="weatherData" class="flex justify-center align-center items-center gap-2 w-full" @fadeLeft>
+            <div class=" p-2 backdrop-blur-2xl bg-[#219ebc]/50 rounded-lg max-w-xl text-center border shadow w-full">
                 <div class="absolute top-0 left-0 mt-2 ml-2">
                     <p class="font-normal opacity-[75%]">Ressenti</p>
                 </div>
@@ -55,11 +55,27 @@
                             class="font-semibold">Ressenti plus chaud.</p>
                     </div>
                 </div>
-            </div>    
+            </div> 
+            <div *ngIf="weatherData" class="flex justify-center align-center items-center gap-y-4 w-full" @fadeRight>
+                <div class=" p-2 backdrop-blur-2xl bg-[#219ebc]/50 rounded-lg max-w-xl text-center border shadow w-full">
+                    <div class="absolute top-0 left-0 mt-2 ml-2">
+                        <p class="font-normal opacity-[75%]">Humidité</p>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <p class="text-2xl font-bold text-center">{{ this.weatherData?.current.humidity }}%</p>
+                        <div class="flex justify-center items-center flex-row-reverse">
+                            <p *ngIf="this.weatherData?.current.humidity < 50" 
+                                class="font-semibold">Humidité faible.</p>
+                                <p *ngIf="this.weatherData?.current.humidity > 50" 
+                                class="font-semibold">Humidité élevée.</p>
+                        </div>
+                    </div>
+                </div>    
+            </div>   
         </div>
     
             <div *ngIf="weatherData" class="flex justify-center w-full">
-                <div class=" p-2 m-4 backdrop-blur-2xl bg-[#219ebc]/50 rounded-lg max-w-xl text-center border shadow w-full" @fadeLeft>
+                <div class=" p-2 backdrop-blur-2xl bg-[#219ebc]/50 rounded-lg max-w-xl text-center border shadow w-full" @fadeLeft>
                     <div class="absolute top-0 left-0 mt-2 ml-2">
                         <p class="font-normal opacity-[75%]">Vent</p>
                     </div>
@@ -77,7 +93,9 @@
                                 <div class="compass-pointer"></div>
                                 <div class="compass-pointer-shadow"></div>
                             </div>
-                            <div class="compass-center"></div>
+                            <div class="compass-center">
+                                <span class="wind-direction">{{ this.weatherData?.current.wind_dir }}</span>
+                            </div>
                         </div>
                     </div>
 

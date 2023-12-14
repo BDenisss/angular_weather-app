@@ -152,7 +152,7 @@ export class WeatherComponent implements OnInit {
         startAngle: 200,
         endAngle: -20,
         min: 0,
-        max: 60,
+        max: 30,
         itemStyle: {
           color: '#48cae4'
         },
