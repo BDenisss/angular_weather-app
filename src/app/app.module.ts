@@ -10,11 +10,13 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ApixuService } from './apixu.service';
+import { Weather2Component } from './view/weather2/weather2.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WeatherComponent,
+    Weather2Component,
   ],
   imports: [
     BrowserModule,
