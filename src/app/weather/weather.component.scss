@@ -1,4 +1,159 @@
 .echart-style {
     width: 100%;
-    height: 200px; 
+    height: 200px;
 }
+
+@mixin circle($size) {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    left: calc(50% - #{$size/2});
+    top: calc(50% - #{$size/2});
+    width: $size;
+    height: $size;
+}
+
+.compass {
+    background: #E9E9E9;
+    width: 10em;
+    height: 10em;
+    border-radius: 3em;
+    position: relative;
+    background-image: linear-gradient(to bottom, #ddd, #d5d5d5);
+    box-shadow: inset 0 .2em .5em 0 #FFF, inset 0 -0.3em .4em 0px rgba(0, 0, 0, .2), 0 1.5em 3em -1em rgba(0, 0, 0, 0.5);
+
+    &:before,
+    &:after {
+        box-sizing: border-box;
+        display: block;
+    }
+
+    &:before {
+        @include circle(8em);
+        background-image: linear-gradient(to top, #fff, #aaa);
+    }
+
+    &:after {
+        @include circle(70%);
+        background: #838381;
+        box-shadow: inset 0 0 2em 0.1em rgba(0, 0, 0, 0.3);
+    }
+}
+
+.compass-flower {
+    @mixin flower-background($color) {
+        background:
+            linear-gradient(80deg, $color 50%, transparent 50%) no-repeat 55% 0,
+            linear-gradient(-80deg, $color 50%, transparent 50%) no-repeat 45% 0,
+
+            linear-gradient(80deg, transparent 50%, $color 50%) no-repeat 45% 100%,
+            linear-gradient(-80deg, transparent 50%, $color 50%) no-repeat 55% 100%,
+
+            linear-gradient(-10deg, $color 50%, transparent 50%) no-repeat 0 45%,
+            linear-gradient(10deg, transparent 50%, $color 50%) no-repeat 0 55%,
+
+            linear-gradient(-10deg, transparent 50%, $color 50%) no-repeat 100% 55%,
+            linear-gradient(10deg, $color 50%, transparent 50%) no-repeat 100% 45%;
+
+        background-size:
+            10% 50%,
+            10% 50%,
+            10% 50%,
+            10% 50%,
+            50% 10%,
+            50% 10%,
+            50% 10%,
+            50% 10%;
+    }
+
+    &,
+    &:before {
+        overflow: hidden;
+        @include circle(4em);
+        @include flower-background(#777);
+        z-index: 1;
+        filter: drop-shadow(0 0 10px 10px #000);
+    }
+
+    &:before {
+        transform: scale(0.8) rotate(45deg);
+    }
+}
+
+.compass-pointer-wrapper {
+    @include circle(2em);
+    z-index: 5;
+    /*-webkit-animation: rotate infinite 6s ease;*/
+    transform: rotate(100deg) scale(0.8);
+}
+
+.compass-pointer {
+    position: relative;
+    z-index: 3;
+    border-top: 1em solid transparent;
+    border-left: 12em solid #BC5C67;
+    border-bottom: 1em solid transparent;
+    top: calc(50% - 1em);
+    left: calc(50% - 3em);
+    transform: scale(.5);
+
+    &:after {
+        content: "";
+        position: absolute;
+        top: -1em;
+        left: -24em;
+        border-top: 1em solid transparent;
+        border-right: 12em solid #FFF;
+        border-bottom: 1em solid transparent;
+    }
+}
+
+.compass-pointer-shadow {
+    position: absolute;
+    z-index: 3;
+    border-top: 1em solid transparent;
+    border-left: 12em solid #8C131D;
+    border-bottom: 1em solid transparent;
+    top: 0;
+    left: calc(50% - 3em);
+    transform: scale(.5);
+    clip: rect(1em, 24em, 24em, -24em);
+
+    &:after {
+        content: "";
+        position: absolute;
+        top: -1em;
+        left: -24em;
+        border-top: 1em solid transparent;
+        border-right: 12em solid #ccc;
+        border-bottom: 1em solid transparent;
+        clip: rect(1em, 24em, 24em, 0);
+    }
+}
+
+.compass-center {
+    @include circle(1em);
+    background: #ddd;
+    z-index: 5;
+    box-sizing: border-box;
+    box-shadow: inset 0 -7px 8px 4px #333, inset 0 -1px 19px -8px #000;
+}
+
+@-webkit-keyframes rotate {
+    0% {
+        transform: rotate(10deg) scale(0.8);
+    }
+
+    20% {
+        transform: rotate(200deg) scale(0.8);
+    }
+
+    60% {
+        transform: rotate(100deg) scale(0.8);
+    }
+
+    100% {
+        transform: rotate(10deg) scale(0.8);
+    }
+}
+

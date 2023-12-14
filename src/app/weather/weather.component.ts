@@ -75,6 +75,7 @@ export class WeatherComponent implements OnInit {
   public weatherSearchForm!: FormGroup;
   public weatherData: any;  
   private echartInstance: any;  
+  public windDegree: number = 0;
 
   option: EChartsOption = {
     series: [
@@ -213,6 +214,8 @@ export class WeatherComponent implements OnInit {
   private updateChart(data: any) {
     const currentTemp = data.current.temp_c;
     const feelsLikeTemp = data.current.feelslike_c;
+    this.windDegree = data.current.wind_degree; // récupération de la valeur
+
     
 
     if (this.echartInstance) {
