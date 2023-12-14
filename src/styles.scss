@@ -10,23 +10,34 @@
   box-sizing: border-box;
 }
 
-html, body, app-root {
-  min-height: 100vh;
-  height: auto;
+html, body {
+  height: 100%;
   margin: 0;
+  padding: 0;
 }
 
-app-root {
+app-weather{
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-body {
-  color: azure;
-  background-image: url('assets/bg_weatherapp2.png');
+  background-image: url('/assets/bg_weatherapp2.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  color: aliceblue;
 }
+
+app-weather2{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #1b263b;
+  color: aliceblue;
+}
+
+
+

@@ -3,6 +3,14 @@
     height: 200px;
 }
 
+body {
+    color: azure;
+    background-image: url('/src/assets/bg_weatherapp2.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
 @mixin circle($size) {
     content: "";
     position: absolute;

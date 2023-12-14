@@ -31,7 +31,7 @@
     </div>
 </div>
 
-<div class="flex items-center justify-center w-full">
+<div class="flex items-center justify-center w-full" *ngIf="weatherData" @fadeUp>
 <div class="flex flex-col bg-[#0d1b2a] rounded-2xl p-4 w-full max-w-xl">
 						<div class="font-bold text-xl">{{ this.weatherData?.location.name }}, {{ this.weatherData?.location.country }}</div>
 						<div class="text-sm text-gray-500">{{ this.weatherData?.location.localtime }}</div>
@@ -39,16 +39,16 @@
                             <img class="h-full w-full" src="{{ this.weatherData?.current.condition.icon }}" alt="weather icon">
 						</div>
 						<div class="flex flex-row items-center justify-center mt-6">
-							<div class="font-medium text-6xl">{{ this.weatherData?.current.temp_c }}</div>
+							<div class="font-medium text-6xl">{{ this.weatherData?.current.temp_c }}°C</div>
 							<div class="flex flex-col items-center ml-6">
 								<div>{{ this.weatherData?.current.condition.text }}</div>
 								<div class="mt-1">
 									<span class="text-sm"><i class="far fa-long-arrow-up"></i></span>
-									<span class="text-sm font-light text-gray-500">{{ this.weatherData?.forecast.forecastday[0].day.maxtemp_c }}°C</span>
+									<span class="text-sm font-light text-gray-500">max: {{ this.weatherData?.forecast.forecastday[0].day.maxtemp_c }}°C</span>
 								</div>
 								<div>
 									<span class="text-sm"><i class="far fa-long-arrow-down"></i></span>
-									<span class="text-sm font-light text-gray-500">{{ this.weatherData?.forecast.forecastday[0].day.mintemp_c }}°C</span>
+									<span class="text-sm font-light text-gray-500">min: {{ this.weatherData?.forecast.forecastday[0].day.mintemp_c }}°C</span>
 								</div>
 							</div>
 						</div>

@@ -130,7 +130,10 @@ export class WeatherComponent implements OnInit {
           show: false
         },
         title: {
-          show: true
+          show: true,
+          color: '#ffffff',
+          fontWeight: 'bolder',
+          opacity: 0.8,
         },
         detail: {
           valueAnimation: true,
@@ -191,6 +194,7 @@ export class WeatherComponent implements OnInit {
     private apixuService: ApixuService,
     private cdr: ChangeDetectorRef,
   ) { }
+
 
   ngOnInit() {
     this.weatherSearchForm = this.formBuilder.group({
