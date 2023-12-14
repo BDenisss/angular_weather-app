@@ -1,6 +1,6 @@
 <h1 class="text-center font-semibold text-2xl drop-shadow-xl">Weather app</h1>
 <div class="flex justify-center w-full">
-    <div class="flex flex-col justify-center max-w-xl rounded-lg shadow p-4 m-4 backdrop-blur-xl bg-[#219ebc]/50 w-full">
+    <div class="flex flex-col justify-center max-w-xl rounded-xl shadow p-4 m-4 backdrop-blur-xl bg-[#219ebc]/50 w-full">
         <h1 class="font-bold">Recherche d'une météo </h1>
         <form action="" [formGroup]="weatherSearchForm" (ngSubmit)="sendToAPIXU(weatherSearchForm.value)">
             <div class="flex justify-center align-center flex-col gap-2">
@@ -28,7 +28,7 @@
 
 <div class="flex flex-wrap items-center align-center justify-center max-w-xl gap-2">
     <div class="flex flex-col justify-center items-center w-full">
-        <div *ngIf="weatherData" class="p-4 backdrop-blur-2xl bg-[#219ebc]/50 rounded-lg max-w-xl text-center border shadow w-full" @fadeLeft>
+        <div *ngIf="weatherData" class="p-4 backdrop-blur-2xl bg-[#219ebc]/50 rounded-xl max-w-xl text-center border shadow w-full" @fadeLeft>
             <p class="font-semibold text-xl">{{ this.weatherData?.location.country}}, {{ this.weatherData?.location.name }}</p>
             <div echarts [options]="option" class="echarts-style flex justify-center items-center" (chartInit)="onChartInit($event)"></div>
             <div class="flex justify-center items-center flex-row-reverse">
@@ -40,7 +40,7 @@
     
     <div class="flex items-center justify-center w-full flex-col gap-2">
         <div *ngIf="weatherData" class="flex justify-center align-center items-center gap-2 w-full" @fadeLeft>
-            <div class=" p-2 backdrop-blur-2xl bg-[#219ebc]/50 rounded-lg max-w-xl text-center border shadow w-full">
+            <div class=" p-2 backdrop-blur-2xl bg-[#219ebc]/50 rounded-xl max-w-xl text-center border shadow w-full">
                 <div class="absolute top-0 left-0 mt-2 ml-2">
                     <p class="font-normal opacity-[75%]">Ressenti</p>
                 </div>
@@ -57,7 +57,7 @@
                 </div>
             </div> 
             <div *ngIf="weatherData" class="flex justify-center align-center items-center gap-y-4 w-full" @fadeRight>
-                <div class=" p-2 backdrop-blur-2xl bg-[#219ebc]/50 rounded-lg max-w-xl text-center border shadow w-full">
+                <div class=" p-2 backdrop-blur-2xl bg-[#219ebc]/50 rounded-xl max-w-xl text-center border shadow w-full">
                     <div class="absolute top-0 left-0 mt-2 ml-2">
                         <p class="font-normal opacity-[75%]">Humidité</p>
                     </div>
@@ -75,7 +75,7 @@
         </div>
     
             <div *ngIf="weatherData" class="flex justify-center w-full">
-                <div class=" p-2 backdrop-blur-2xl bg-[#219ebc]/50 rounded-lg max-w-xl text-center border shadow w-full" @fadeLeft>
+                <div class=" p-2 backdrop-blur-2xl bg-[#219ebc]/50 rounded-xl max-w-xl text-center border shadow w-full" @fadeLeft>
                     <div class="absolute top-0 left-0 mt-2 ml-2">
                         <p class="font-normal opacity-[75%]">Vent</p>
                     </div>
