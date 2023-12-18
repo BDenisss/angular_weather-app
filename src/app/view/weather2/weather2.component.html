@@ -79,7 +79,12 @@
 		</div>
 		<div class="flex flex-row gap-x-8 overflow-x-auto snap-x overscroll-x-auto scrollbar snap-center" style="scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;">
 			<div class="flex flex-col items-center justify-center" *ngFor="let hour of weatherData?.forecast.forecastday[0].hour" style="scroll-snap-align: start;">
-				<p>{{ convertEpochToTime(hour.time_epoch) }}h</p>
+				<div *ngIf="getCurrentTime() != convertEpochToTime(hour.time_epoch)">
+					<p>{{ convertEpochToTime(hour.time_epoch) }}h</p>
+				</div>
+				<div *ngIf="getCurrentTime() === convertEpochToTime(hour.time_epoch)">
+					<p class="font-bold">Now</p>
+				</div>
 				<img class="h-full w-full" src="{{ hour.condition.icon }}" alt="{{ hour.condition.text }}">
 				<p>{{ hour.temp_c }}°</p>
 			</div> 
