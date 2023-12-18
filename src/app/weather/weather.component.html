@@ -21,11 +21,13 @@
                     formControlName="location"
                 /> 
                 <div>
-                    <button 
+                    <button
+                        (click)="getHttpStatus(weatherSearchForm.value.location)" 
                         class="w-full text-white text-center font-bold bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                         type="submit">
                         Rechercher la météo</button>
                 </div>
+                <p *ngIf="httpStatus === 400">Oups... Une faute de frappe ?</p>
             </div>
         </form>
     </div>

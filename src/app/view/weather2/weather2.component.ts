@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ApixuService } from '../../apixu.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { EChartsOption } from 'echarts';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Subject } from 'rxjs';
 
 interface GaugeData {
   value: number;
@@ -76,6 +78,8 @@ export class Weather2Component implements OnInit {
   public weatherData: any;  
   private echartInstance: any;  
   public windDegree: number = 0;
+  public httpStatus: number | null = null;
+  currentTime: number;
 
   option: EChartsOption = {
     series: [
@@ -189,11 +193,15 @@ export class Weather2Component implements OnInit {
     ]
   };
 
+
   constructor(
     private formBuilder: FormBuilder,
     private apixuService: ApixuService,
     private cdr: ChangeDetectorRef,
-  ) { }
+    private http: HttpClient
+  ) {
+    this.currentTime = this.getCurrentTime();
+  }
 
   ngOnInit() {
     this.weatherSearchForm = this.formBuilder.group({
@@ -213,6 +221,32 @@ export class Weather2Component implements OnInit {
       this.cdr.detectChanges();
     });
   }
+
+  convertEpochToTime(epoch: number) {
+    const date = new Date(epoch * 1000);
+    return date.getHours();
+  }
+
+  getCurrentTime() {
+    const date = new Date();
+    console.log("l'heure actuelle : " + date.getHours() + "h");
+    return date.getHours();
+  }
+
+  getHttpStatus(location: string) {
+    this.http.get("http://api.weatherapi.com/v1/forecast.json?key=86ed1e2e3fa8463dbf6144335231212&q=" + location + "&aqi=yes&lang=fr").subscribe({
+      next: (data: any) => {
+        // Supposons que 'status' est une propriété valide de 'data'
+        this.httpStatus = 200;
+        console.log('Données HTTP', data);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.httpStatus = error.status;
+        console.log('Erreur HTTP', error);
+      }
+    });
+  }
+  
 
   private updateChart(data: any) {
     const currentTemp = data.current.temp_c;

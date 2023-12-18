@@ -22,17 +22,19 @@
                 /> 
                 <div>
                     <button 
+						(click)="getHttpStatus(weatherSearchForm.value.location)"
                         class="w-full text-white text-center font-bold bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
                         type="submit">
                         Rechercher la météo</button>
                 </div>
+				<p *ngIf="httpStatus === 400">Oups... Une faute de frappe ?</p>
             </div>
         </form>
     </div>
 </div>
 
 <div class="flex items-center justify-center w-full" *ngIf="weatherData" @fadeUp>
-<div class="flex flex-col bg-[#0d1b2a] rounded-2xl p-4 w-full max-w-xl lightBox">
+<div class="flex flex-col bg-[#0d1b2a] rounded-2xl p-4 mx-4 w-full max-w-xl lightBox">
 						<div class="font-bold text-xl">{{ this.weatherData?.location.name }}, {{ this.weatherData?.location.country }}</div>
 						<div class="text-sm text-gray-500">{{ this.weatherData?.location.localtime }}</div>
 						<div class="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-indigo-400 h-24 w-24">
@@ -68,3 +70,21 @@
 						</div>
 					</div>
 </div>
+
+
+<div *ngIf="weatherData" class="flex justify-center items-center w-full" @fadeUp>
+	<div class="flex flex-col bg-[#0d1b2a] rounded-2xl p-4 w-full max-w-xl lightBox m-4 gap-y-2">
+		<div class="flex justify-start items-center">
+			<p class="text-sm opacity-50 font-semibold text-center">Prévisions heure par heure</p>
+		</div>
+		<div class="flex flex-row gap-x-8 overflow-x-auto snap-x overscroll-x-auto scrollbar snap-center" style="scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;">
+			<div class="flex flex-col items-center justify-center" *ngFor="let hour of weatherData?.forecast.forecastday[0].hour" style="scroll-snap-align: start;">
+				<p>{{ convertEpochToTime(hour.time_epoch) }}h</p>
+				<img class="h-full w-full" src="{{ hour.condition.icon }}" alt="{{ hour.condition.text }}">
+				<p>{{ hour.temp_c }}°</p>
+			</div> 
+		</div>
+		
+	</div>
+</div>
+
