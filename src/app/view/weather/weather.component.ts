@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ApixuService } from '../apixu.service';
+import { ApixuService } from '../../service/apixu.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { EChartsOption } from 'echarts';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
