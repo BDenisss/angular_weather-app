@@ -78,14 +78,14 @@
 			<p class="text-sm opacity-50 font-semibold text-center">Prévisions heure par heure</p>
 		</div>
 		<div class="grid grid-flow-col auto-cols-max gap-x-8 overflow-x-auto snap-x overscroll-x-auto scrollbar snap-center" style="scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;">
-			<div class="grid place-items-center" *ngFor="let hour of weatherData?.forecast.forecastday[0].hour" style="scroll-snap-align: start;">
+			<div class="grid place-items-center max-sm: w-[48px]" *ngFor="let hour of weatherData?.forecast.forecastday[0].hour" style="scroll-snap-align: start;">
 			  	<div *ngIf="getCurrentTime() != convertEpochToTime(hour.time_epoch)">
 					<p class="font-medium text-lg">{{ convertEpochToTime(hour.time_epoch) }}h</p>
 				</div>
 			  	<div *ngIf="getCurrentTime() === convertEpochToTime(hour.time_epoch)">
 					<p class="font-bold">Maint.</p>
 				</div>
-				<img class="h-full w-full" src="{{ hour.condition.icon }}" alt="{{ hour.condition.text }}">
+				<img class="md:h-full md:w-full " src="{{ hour.condition.icon }}" alt="{{ hour.condition.text }}">
 				<p class="font-medium text-lg">{{ hour.temp_c }}°</p>
 			</div>
 		</div>
