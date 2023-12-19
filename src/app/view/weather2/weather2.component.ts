@@ -222,6 +222,18 @@ export class Weather2Component implements OnInit {
     });
   }
 
+  convertEpochToTimeAndCompareWithCurrentTime(epoch: number) {
+    const date = new Date(epoch * 1000);
+    const hour = date.getHours();
+
+    if (hour === this.currentTime) {
+      return true;
+
+    } else {
+      return false;
+    }
+  }
+
   convertEpochToTime(epoch: number) {
     const date = new Date(epoch * 1000);
     return date.getHours();
