@@ -8,7 +8,7 @@
 <div class="flex justify-center w-full">
     <div class="flex flex-col justify-center max-w-xl rounded-xl shadow p-4 m-4 backdrop-blur-xl bg-[#219ebc]/50 w-full">
         <h1 class="font-bold">Recherche d'une météo </h1>
-        <form action="" [formGroup]="weatherSearchForm" (ngSubmit)="sendToAPIXU(weatherSearchForm.value)">
+        <form action="" [formGroup]="weatherSearchForm" (ngSubmit)="sendToAPIXU(weatherSearchForm.value)" (ngSubmit)="sendToAPIXUAstro(weatherSearchForm.value)">
             <div class="flex justify-center align-center flex-col gap-2">
                 <label class="block mb-2 font-medium text-gray-900 dark:text-white" for="city"></label>
                 <input  
@@ -92,3 +92,16 @@
 	</div>
 </div>
 
+<div *ngIf="weatherData" class="flex justify-center items-center w-full" @fadeUp>
+	<div class="flex flex-col bg-[#0d1b2a] rounded-2xl p-4 w-full max-w-xl lightBox m-4 gap-y-2">
+		<div class="flex justify-start items-center">
+			<p class="text-sm opacity-50 font-semibold text-center">Prévisions sur les 10 jours prochain <i class="font-light text-sm">(temp. max) </i></p>
+		</div>
+		<div class="grid grid-flow-col auto-cols-max gap-x-10 overflow-x-auto snap-x overscroll-x-auto scrollbar snap-center" style="scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;">
+			<div class="grid place-items-center max-sm: w-full" *ngFor="let day of weatherData?.forecast.forecastday" style="scroll-snap-align: start;">
+				<p *ngIf="convertEpochToDay(day.date_epoch) === 'Aujourd\'hui'" class="font-medium text-lg">Auj.</p>
+				<p *ngIf="convertEpochToDay(day.date_epoch) !== 'Aujourd\'hui'" class="font-medium text-lg">{{ convertEpochToDay(day.date_epoch) }}</p>
+				<img class="md:h-full md:w-full" src="{{ day.day.condition.icon }}" alt="{{ day.day.condition.text }}">
+				<p class="font-medium text-lg">{{ day.day.maxtemp_c | number }}°</p>
+			</div>
+</div>

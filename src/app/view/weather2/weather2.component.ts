@@ -214,10 +214,26 @@ export class Weather2Component implements OnInit {
   }
 
   sendToAPIXU(formValues: any) {
-    this.apixuService.getWeather(formValues.location).subscribe(data => {
+    this.apixuService.getWeatherForecast(formValues.location).subscribe(data => {
       this.weatherData = data;
       console.log(data)
       this.updateChart(data);
+      this.cdr.detectChanges();
+    });
+  }
+
+  sendToAPIXUAstro(formValues: any) {
+    this.apixuService.getWeatherAstro(formValues.location).subscribe(data => {
+      this.weatherData = data;
+      console.log(data)
+      this.cdr.detectChanges();
+    });
+  }
+
+  sendToAPIXUDaily(formValues: any) {
+    this.apixuService.getWeatherForecastDaily(formValues.location).subscribe(data => {
+      this.weatherData = data;
+      console.log(data)
       this.cdr.detectChanges();
     });
   }
@@ -238,30 +254,38 @@ export class Weather2Component implements OnInit {
     const date = new Date(epoch * 1000);
     return date.getHours();
   }
-
   convertEpochToDay(epoch: number) {
-    const date = new Date(epoch * 1000);
-    const day = date.getDay();
-
+    const convertedDate = new Date(epoch * 1000);
+    const currentDate = new Date();
+  
+    // Compare l'année, le mois et le jour
+    if (convertedDate.getFullYear() === currentDate.getFullYear() &&
+        convertedDate.getMonth() === currentDate.getMonth() &&
+        convertedDate.getDate() === currentDate.getDate()) {
+      return 'Aujourd\'hui';
+    }
+  
+    const day = convertedDate.getDay();
     switch (day) {
       case 0:
-        return 'Dimanche';
+        return 'Dim.';
       case 1:
-        return 'Lundi';
+        return 'Lun.';
       case 2:
-        return 'Mardi';
+        return 'Mar.';
       case 3:
-        return 'Mercredi';
+        return 'Mer.';
       case 4:
-        return 'Jeudi';
+        return 'Jeu.';
       case 5:
-        return 'Vendredi';
+        return 'Ven.';
       case 6:
-        return 'Samedi';
+        return 'Sam.';
       default:
-        return 'Jour inconnu';
+        return 'N/A';
     }
   }
+  
 
   getCurrentTime() {
     const date = new Date();

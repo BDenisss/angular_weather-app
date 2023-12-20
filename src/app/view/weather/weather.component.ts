@@ -209,15 +209,23 @@ export class WeatherComponent implements OnInit {
   onChartInit(ec: any) {
     this.echartInstance = ec;
   }
-
   sendToAPIXU(formValues: any) {
-    this.apixuService.getWeather(formValues.location).subscribe(data => {
+    this.apixuService.getWeatherForecast(formValues.location).subscribe(data => {
       this.weatherData = data;
       console.log(data)
       this.updateChart(data);
       this.cdr.detectChanges();
     });
   }
+
+  sendToAPIXUAstro(formValues: any) {
+    this.apixuService.getWeatherAstro(formValues.location).subscribe(data => {
+      this.weatherData = data;
+      console.log(data)
+      this.cdr.detectChanges();
+    });
+  }
+
 
   getHttpStatus(location: string) {
     this.http.get("http://api.weatherapi.com/v1/forecast.json?key=86ed1e2e3fa8463dbf6144335231212&q=" + location + "&aqi=yes&lang=fr").subscribe({

@@ -8,9 +8,21 @@ export class ApixuService {
 
   constructor(private http: HttpClient) { }
 
-  getWeather(location: string) {
+  getWeatherForecast(location: string) {
     return this.http.get(
-      'http://api.weatherapi.com/v1/forecast.json?key=86ed1e2e3fa8463dbf6144335231212&q=' + location + '&aqi=yes' + '&lang=fr'
+      'http://api.weatherapi.com/v1/forecast.json?key=86ed1e2e3fa8463dbf6144335231212&q=' + location + '&days=10' + '&lang=fr'
+    );
+  }
+
+  getWeatherAstro(location: string) {
+    return this.http.get(
+      'http://api.weatherapi.com/v1/astronomy.json?key=86ed1e2e3fa8463dbf6144335231212&q=' + location + '&lang=fr'
+    );
+  }
+
+  getWeatherForecastDaily(location: string) {
+    return this.http.get(
+      'http://api.weatherapi.com/v1/forecast.json?key=86ed1e2e3fa8463dbf6144335231212&q=' + location + '&days=7' + '&lang=fr'
     );
   }
 
